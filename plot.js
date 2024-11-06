@@ -22,6 +22,16 @@ d3.csv("target_file.csv").then(function (data) {
   d3.csv("test_forecast.csv").then(function (forecastData) {
     const uniqueLocations = Array.from(new Set(data.map(d => d.location_name)));
 
+    const rows = data.length - 1;
+
+    // Read first and last date for the drop down
+    const firstDate = new Date(data[0].date);
+    const lastDate = new Date(data[rows].date);
+    const firstYear = firstDate.getFullYear();
+    const lastYear = lastDate.getFullYear();
+
+    generateMonthYearDropDown(firstYear, lastYear);
+
     // Create a dropdown menu to select the location
     const dropdown = d3.select("#location");
 
@@ -55,6 +65,14 @@ d3.csv("target_file.csv").then(function (data) {
       updateChart(data, forecastData);
     });
 
+    d3.select("#monthDropDown").on("change", (event) => {
+      updateChart(data, forecastData);
+    });
+
+    d3.select("#yearDropDown").on("change", (event) => {
+      updateChart(data, forecastData);
+    });
+
     // Update chart when the credible interval is changed
     d3.selectAll('input[name="credible-interval"]').on("change", function () {
       updateChart(data, forecastData);
@@ -64,11 +82,37 @@ d3.csv("target_file.csv").then(function (data) {
   });
 });
 
+function generateMonthYearDropDown(firstYear, lastYear) {
+    // Get a reference to the select element
+    const monthDropDown = document.getElementById("monthDropDown");
+    const yearDropDown = document.getElementById("yearDropDown");
+
+    for(let i = lastYear; i <= firstYear; i++) {
+      // Create a new option element
+      const newOption = document.createElement("option");
+      newOption.value = i;
+      newOption.text = i;
+      yearDropDown.add(newOption);
+    }
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+      'October', 'November', 'December'];
+    for (let i = 0; i < 12; i++) {
+      const newOption = document.createElement("option");
+      newOption.value = i+1;
+      newOption.text = months[i];
+      monthDropDown.add(newOption);
+    }
+}
+
 // Function to update the chart based on the selected location
 function updateChart(data, forecastData) {
   const selectedLocation = d3.select("#location").property("value");
-  let filteredForecastData = forecastData.filter(d => d.location_name === selectedLocation);
-  let filteredData = data.filter(d => d.location_name === selectedLocation);
+  const selectedYear = d3.select("#yearDropDown").property("value");
+  const selectedMonth = d3.select("#monthDropDown").property("value");
+  const filteredDate = new Date(selectedYear, selectedMonth - 1, 1);
+  let filteredForecastData = forecastData.filter(d => d.location_name === selectedLocation && new Date(d.date) >= filteredDate);
+  let filteredData = data.filter(d => d.location_name === selectedLocation && new Date(d.date) >= filteredDate);
 
   // Sort the data by date
   filteredData.sort((a, b) => a.date - b.date);
