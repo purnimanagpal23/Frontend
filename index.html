@@ -79,17 +79,17 @@
         </div>
         <div class="model-section">
             <h2>Select Models</h2>
-            <div class="model-checkboxes">
-                <label><input type="checkbox" id="cfa-wwrenewal"  disabled="disabled">   ForecastHub ensemble</label>
-                <label><input type="checkbox" id="COVIDhub-baseline"> COVIDhub-baseline</label>
-                <label><input type="checkbox" id="COVIDhub-4_week_ensem" > COVIDhub-4_week_ensemble</label>
-                <label><input type="checkbox" id="COVIDhub-4_week_ensemble" > COVIDhub-4_week_ensemble</label>
-                <label><input type="checkbox" id="COVIDhub-4_week_ensembl" > OHT_JHU-hybrid</label>
-                <label><input type="checkbox" id="cfa-wwrenewal"  disabled="disabled"> cfa-wvrenewal</label>
-                <label><input type="checkbox" id="COVIDhub-DC-ensemble" > COVIDhub-DC-ensemble</label>
-                <label><input type="checkbox" id="MOBS-GLEAM-COVID" > MOBS-GLEAM-COVID</label>
-                <label><input type="checkbox" id="CEPH-Rtrend_covid" > CEPH-Rtrend_covid</label>
-                <label><input type="checkbox" id="Another Model" > Another Model</label>
+            <div class="model-checkboxes" id="forecast_models">
+                <label><input type="checkbox" name="forecast_model" id="cfa-wwrenewal"  value="cfa-wwrenewal" disabled="disabled">   ForecastHub ensemble</label>
+                <label><input type="checkbox" name="forecast_model" id="COVIDhub-baseline" value="COVIDhub-baseline"> COVIDhub-baseline</label>
+                <label><input type="checkbox" name="forecast_model" id="COVIDhub-4_week_ensem" value="COVIDhub-4_week_ensem"> COVIDhub-4_week_ensemble</label>
+                <label><input type="checkbox" name="forecast_model" id="COVIDhub-4_week_ensemble" value="COVIDhub-4_week_ensemble"> COVIDhub-4_week_ensemble</label>
+                <label><input type="checkbox" name="forecast_model" id="COVIDhub-4_week_ensembl" value="COVIDhub-4_week_ensembl" > OHT_JHU-hybrid</label>
+                <label><input type="checkbox" name="forecast_model" id="cfa-wwrenewal" value="cfa-wwrenewal" disabled="disabled"> cfa-wvrenewal</label>
+                <label><input type="checkbox" name="forecast_model" id="COVIDhub-DC-ensemble" value="COVIDhub-DC-ensemble"> COVIDhub-DC-ensemble</label>
+                <label><input type="checkbox" name="forecast_model" id="MOBS-GLEAM-COVID" value="COVIDhub-DC-ensemble"> MOBS-GLEAM-COVID</label>
+                <label><input type="checkbox" name="forecast_model" id="CEPH-Rtrend_covid" value="CEPH-Rtrend_covid" > CEPH-Rtrend_covid</label>
+                <label><input type="checkbox" name="forecast_model" id="Another Model" value="Another Model" > Another Model</label>
                 <script src="checkbox_selection.js"></script>
                 <!-- Add more models as needed -->
             </div>
@@ -115,26 +115,10 @@
                 <div class="date-starting">
                     <label><strong>Date Starting From</strong></label>
                     </br>
-                    <select id="month">
-                        <option value="01">January</option>
-                        <option value="02">February</option>
-                        <option value="03">March</option>
-                        <option value="04">April</option>
-                        <option value="05">May</option>
-                        <option value="06">June</option>
-                        <option value="07">July</option>
-                        <option value="08">August</option>
-                        <option value="09">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
+                    <select id="monthDropDown">
                     </select>
 
-                    <select id="year">
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <!-- Add more years as needed -->
+                    <select id="yearDropDown">
                     </select>
                 </div>
             </div>
